@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# data, results and model weights are never committed
+data/
+results/
+outputs/
+*.npz
+*.npy
+*.h5
+*.h5ad
+*.parquet
+*.tif
+*.tiff
+*.btf
+*.pt
+*.pth
+*.safetensors
+*.log
+
+# manuscript material does not belong in the code repository
+*.docx
+*.pdf
+manuscript/
+
+# editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emit-spatial"
+dynamic = ["version"]
+description = "EMIT: single-cell expression from spot-based spatial transcriptomics and histology"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["spatial transcriptomics", "Visium", "Visium HD", "histology", "single cell", "deconvolution"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.10",
+    "pandas>=1.5",
+    "scikit-learn>=1.2",
+    "torch>=2.0",
+    "h5py>=3.7",
+    "anndata>=0.9",
+]
+
+[project.optional-dependencies]
+# nucleus segmentation and morphometrics from the H&E image
+segment = ["stardist>=0.8", "tensorflow>=2.10", "scikit-image>=0.20", "tifffile", "imagecodecs",
+           "pillow"]
+# frozen pathology foundation-model embeddings of each cell
+features = ["transformers>=4.40", "tifffile", "imagecodecs", "pillow"]
+# Visium HD (bin positions are stored as parquet)
+hd = ["pyarrow>=12"]
+dev = ["pytest>=7", "ruff>=0.4"]
+all = ["emit-spatial[segment,features,hd]"]
+
+[project.scripts]
+emit = "emit.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "emit._version.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+ignore = ["E741", "B905"]
