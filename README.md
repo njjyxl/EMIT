@@ -8,14 +8,11 @@ apart. EMIT treats each spot as a set of molecules to be *apportioned* among the
 that produced them, the way emission tomography assigns detected events to the sources it
 cannot resolve, with the H&E image guiding the reconstruction.
 
-- **Inside spots, counts are allocated, not predicted.** The counts of the cells of a spot
-  always sum exactly to what the spot measured.
-- **Between spots, cells are predicted** from the histology by the network trained on the
-  allocated counts. These cells are flagged, because no measurement constrains them.
 - **No reference is needed**: no single-cell atlas, cell-type labels or per-cell training
   data. The model is fitted on the section itself.
 - **Visium HD**: subcellular bins are assigned to single cells, and the resulting cells
   can anchor the fit of a standard Visium section.
+  ![](https://github.com/njjyxl/EMIT/blob/devel/Overview.jpg)
 
 ## Installation
 
